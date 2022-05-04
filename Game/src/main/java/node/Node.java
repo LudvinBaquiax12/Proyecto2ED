@@ -25,8 +25,6 @@ public class Node {
         this.right = null;
     }
 
-    
-
     /**
      * @return the card
      */
@@ -105,9 +103,9 @@ public class Node {
     public String getInternalCode() {
         String etiqueta;
         if (left == null && right == null) {
-            etiqueta = "nodo" + card.getValueTree() + " [ label =\"" + card.getValueCard() + "♥" + "\"];\n";
+            etiqueta = "nodo" + card.getValueTree() + " [ label =\"" + card.getTypeCardUTF8() + "\"];\n";
         } else {
-            etiqueta = "nodo" + card.getValueTree() + " [ label =\"<C0>|" + card.getValueCard() + "♥" + "|<C1>\"];\n";
+            etiqueta = "nodo" + card.getValueTree() + " [ label =\"<C0>|" + card.getTypeCardUTF8() + "|<C1>\"];\n";
         }
         if (left != null) {
             etiqueta = etiqueta + left.getInternalCode()
@@ -118,5 +116,9 @@ public class Node {
                     + "nodo" + card.getValueTree() + ":C1->nodo" + right.getCard().getValueTree() + "\n";
         }
         return etiqueta;
+    }
+
+    public boolean isHoja() {
+        return left == null && right == null;
     }
 }

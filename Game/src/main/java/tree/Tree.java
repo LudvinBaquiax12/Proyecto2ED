@@ -6,13 +6,14 @@
 package tree;
 
 import cards.Card;
+import com.google.gson.JsonObject;
 import node.Node;
 
 /**
  *
  * @author baquiax
  */
-public class tree {
+public class Tree {
 
     private Node root;
 
@@ -20,12 +21,12 @@ public class tree {
      * Tree constructor
      *
      */
-    public tree() {
+    public Tree() {
         this.root = null;
     }
 
     /**
-     * Insert a new node in the tree
+     * Insert a new node in the Tree
      *
      * @param card
      */
@@ -222,8 +223,22 @@ public class tree {
         }
     }
 
+    /**
+     * Recorre el Arbol de manera InOden
+     *
+     * @return
+     */
     public String inOrden() {
         return getTextJson(inOrden(root));
+    }
+
+    /**
+     * Recorre el Arbol de manera InOden
+     *
+     * @return
+     */
+    public JsonObject inOrdenJson() {
+        return getJson(inOrden(root));
     }
 
     /**
@@ -235,15 +250,29 @@ public class tree {
     private String inOrden(Node root) {
         if (root != null) {
             return inOrden(root.getLeft())
-                    + String.valueOf(root.getCard().valueCard()) + "\n"
+                    + String.valueOf(root.getCard().getTypeCardUTF8()) + "\n"
                     + inOrden(root.getRight());
         } else {
             return "";
         }
     }
 
+    /**
+     * Recorre el arbol en forma PreOrden
+     *
+     * @return
+     */
     public String preOrden() {
         return getTextJson(preOrden(root));
+    }
+
+    /**
+     * Recorre el arbol en forma PreOrden
+     *
+     * @return
+     */
+    public JsonObject preOrdenJson() {
+        return getJson(preOrden(root));
     }
 
     /**
@@ -254,7 +283,7 @@ public class tree {
      */
     private String preOrden(Node root) {
         if (root != null) {
-            return String.valueOf(root.getCard().valueCard()) + "\n"
+            return String.valueOf(root.getCard().getTypeCardUTF8()) + "\n"
                     + preOrden(root.getLeft())
                     + preOrden(root.getRight());
         } else {
@@ -262,8 +291,22 @@ public class tree {
         }
     }
 
+    /**
+     * Recorre el arbol de manera PostOrden
+     *
+     * @return
+     */
     public String postOrden() {
         return getTextJson(postOrden(root));
+    }
+
+    /**
+     * Recorre el arbol de manera PostOrden
+     *
+     * @return
+     */
+    public JsonObject postOrdenJson() {
+        return getJson(postOrden(root));
     }
 
     /**
@@ -276,12 +319,18 @@ public class tree {
         if (root != null) {
             return postOrden(root.getLeft())
                     + postOrden(root.getRight())
-                    + String.valueOf(root.getCard().valueCard()) + "\n";
+                    + String.valueOf(root.getCard().getTypeCardUTF8()) + "\n";
         } else {
             return "";
         }
     }
 
+    /**
+     * Retorna un texto en formato Json
+     *
+     * @param data
+     * @return
+     */
     public String getTextJson(String data) {
         String[] aux = data.split("\n");
         for (int i = 0; i < aux.length; i++) {
@@ -298,6 +347,29 @@ public class tree {
         return values;
     }
 
+    /**
+     * Retorna un objeto Json
+     *
+     * @param data
+     * @return
+     */
+    private JsonObject getJson(String data) {
+        //create Json Object
+        JsonObject json = new JsonObject();
+
+        // finally output the json string
+        String[] aux = data.split("\n");
+        for (int i = 0; i < aux.length; i++) {
+            json.addProperty(String.valueOf(i), aux[i]);
+        }
+        return json;
+    }
+
+    /**
+     * Retorna el codigo Graphviz del arbol
+     *
+     * @return
+     */
     public String graphviz() {
         return root.getGraphvizCode();
     }
@@ -313,6 +385,16 @@ public class tree {
     }
 
     /**
+     * Ver los nodos de un nivel deperminado
+     *
+     * @param level
+     * @return el Json
+     */
+    public JsonObject seeLevelJson(int level) {
+        return getJson(seeLevel(root, level));
+    }
+
+    /**
      * Ver el nivel de manera recursiva
      *
      * @param nodo
@@ -322,7 +404,7 @@ public class tree {
     private String seeLevel(Node nodo, int nivel) {
         if (nodo != null) {
             if (nivel == 1) {
-                return String.valueOf(nodo.getCard().valueCard()) + "\n";
+                return String.valueOf(nodo.getCard().getTypeCardUTF8()) + "\n";
             }
             return seeLevel(nodo.getLeft(), nivel - 1)
                     + seeLevel(nodo.getRight(), nivel - 1);
@@ -330,6 +412,11 @@ public class tree {
         return "";
     }
 
+    /**
+     * Retorna si el arbol es vacio
+     *
+     * @return
+     */
     public boolean isEmpty() {
         return root == null;
     }

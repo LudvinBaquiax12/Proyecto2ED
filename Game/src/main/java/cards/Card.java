@@ -16,6 +16,11 @@ public class Card {
     public static final int HEART = 40;
     public static final int SPADE = 60;
 
+    public static final String CLUB_S = "\u2663";
+    public static final String DIAMOND_S = "\u2666";
+    public static final String HEART_S = "\u2665";
+    public static final String SPADE_S = "\u2660";
+
     private String value;
     private String type;
 
@@ -97,7 +102,16 @@ public class Card {
      *
      * @return
      */
-    public String valueCard() {
+    public String getTypeCardUTF8() {
+        if ("♣".equals(type)) {
+            return value + CLUB_S;
+        } else if ("♦".equals(type)) {
+            return value + DIAMOND_S;
+        } else if ("♥".equals(type)) {
+            return value + HEART_S;
+        } else if ("♠".equals(type)) {
+            return value + SPADE_S;
+        }
         return value + type;
     }
 
