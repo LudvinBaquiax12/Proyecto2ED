@@ -86,7 +86,7 @@ public class start extends HttpServlet {
         Tree tree = Game.starGame(body);
         request.getSession().setAttribute("tree", tree);
         //response.sendError(400,"hola");
-        //response.setStatus(200);
+        response.setStatus(200);
     }
 
     /**

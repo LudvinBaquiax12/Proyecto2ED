@@ -47,7 +47,7 @@ public class avltree extends HttpServlet {
                 response.sendError(400);
             }
         } else {
-            System.out.println("null tree");
+            response.sendError(400);
         }
 
         if (json != null) {
@@ -56,6 +56,7 @@ public class avltree extends HttpServlet {
             PrintWriter out = response.getWriter();
 
             out.print(json.toString());
+            response.setStatus(200);
         } else {
             response.sendError(400);
         }
