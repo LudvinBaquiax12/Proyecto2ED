@@ -5,8 +5,6 @@
  */
 package com.mycompany.game;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import controllers.Game;
 import java.io.BufferedReader;
 import java.io.IOException;

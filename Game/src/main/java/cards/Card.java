@@ -46,7 +46,7 @@ public class Card {
      * @return the value
      */
     public int getValueCard() {
-        if ("As".equals(value)) {
+        if ("A".equals(value)) {
             return 1;
         } else if ("J".equals(value)) {
             return 11;
@@ -55,6 +55,7 @@ public class Card {
         } else if ("K".equals(value)) {
             return 13;
         } else {
+            System.out.println(value);
             return Integer.valueOf(value);
         }
     }

@@ -29,7 +29,8 @@
             <version>0.18.1</version>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <!-- Dependencia de Gsons
+        https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
